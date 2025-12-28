@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Buy Me a Coffee 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  background: linear-gradient(135deg, #ffb6d9, #ffcce6);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card {
+  background: #fff0f7;
+  border-radius: 20px;
+  padding: 25px;
+  width: 360px;
+  box-shadow: 0 10px 30px rgba(255,105,180,0.3);
+}
+
+h1 {
+  text-align: center;
+  color: #ff4da6;
+  margin-bottom: 10px;
+}
+
+p {
+  text-align: center;
+  color: #ff66b2;
+  font-size: 14px;
+}
+
+.wallet {
+  background: #ffe6f2;
+  padding: 10px;
+  border-radius: 12px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: #cc0066;
+  word-break: break-all;
+}
+
+input, select, textarea, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ffb3d9;
+  font-size: 14px;
+}
+
+button {
+  background: #ff4da6;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #e60073;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #cc0066;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>☕ Buy Me a Coffee</h1>
+  <p>Support me with crypto 💕</p>
+
+  <div class="wallet">
+    <strong>BTC:</strong><br>
+    bc1q9lsxwu958lgr8ncpapq9mv24322xz08mjp2a6k
+  </div>
+
+  <div class="wallet">
+    <strong>LTC:</strong><br>
+    LMgMu54pz7mJYb4suBumSPbgEQ9GjfNaHe
+  </div>
+
+  <div class="wallet">
+    <strong>Binance user ID:</strong><br>
+    711996802
+  </div>
+
+  <select id="coin">
+    <option value="BTC">Bitcoin (BTC)</option>
+    <option value="LTC">Litecoin (LTC)</option>
+    <option value="BNB">Binance (BNB)</option>
+  </select>
+
+  <input type="text" id="name" placeholder="Your Name" required>
+  <input type="text" id="username" placeholder="Username / Discord Tag" required>
+  <input type="text" id="amount" placeholder="Amount Sent" required>
+  <input type="text" id="txid" placeholder="Transaction ID" required>
+
+  <button onclick="sendTip()">Send Tip Info 💖</button>
+
+  <div class="footer">
+    Thank you for supporting ✨
+  </div>
+</div>
+
+<script>
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1454794369998655491/sooqqkpXAvYPmVMCMGT6UJcbUJKExrwfMbEkG1k32s2G8B9wA-CDIH3GlmphWJKzVii6";
+
+function sendTip() {
+  const data = {
+    content: "💖 **New Coffee Tip Received!** ☕",
+    embeds: [{
+      color: 16738740,
+      fields: [
+        { name: "Name", value: document.getElementById("name").value || "N/A", inline: true },
+        { name: "Username", value: document.getElementById("username").value || "N/A", inline: true },
+        { name: "Coin", value: document.getElementById("coin").value, inline: true },
+        { name: "Amount", value: document.getElementById("amount").value, inline: true },
+        { name: "Transaction ID", value: document.getElementById("txid").value }
+      ],
+      footer: { text: "Buy Me a Coffee Website 💕" }
+    }]
+  };
+
+  fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(() => alert("Thank you! 💖 Tip info sent successfully."))
+  .catch(() => alert("Error sending info 😢"));
+}
+</script>
+
+</body>
+</html>
